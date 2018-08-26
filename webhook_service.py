@@ -1,3 +1,6 @@
+"""
+Webhook service for triggering automated deployment on kubernetes on github push
+"""
 from flask import Flask, request
 import git
 import logging
@@ -42,7 +45,7 @@ def cloneRepo(repoUrl, logger):
    return dirPath
 
 def cleanRepo(dirPath):
-   """"""
+   """Clean cloned repo, since not usefull after deployment"""
    dirPath = dirPath.split(APP_NAME)[0][:-1]
    shutil.rmtree(dirPath)
 
@@ -71,8 +74,8 @@ def buildDockerImage(logger, dirPath):
    return imageTagName
 
 def deployApp(imageTag):
-   """
-   """
+   """Deploy App using kubectl command and Docker @imageTag"""
+
    logger.info("Deploying image with tag: %s" % imageTag)
    appName = imageTag.replace(":", "")
    deployCommand = ("kubectl run %s --image=%s --port=5000 "
@@ -86,8 +89,8 @@ def deployApp(imageTag):
    return appName
 
 def exposeAppService(appName):
-   """
-   """
+   """Expose deployment as service using kubectl and @appName"""
+
    exposeAppCmd = "kubectl expose deployment %s --type=LoadBalancer" % appName
    logger.info("Exposing app: %s" % appName)
    logger.info("Expose app command: %s" % exposeAppCmd)
@@ -96,7 +99,7 @@ def exposeAppService(appName):
    except Exception:
       logger.exception("Exposing App failed: %s" % appName)
       raise
-   logger.info("Exposed app %s on Cluster sucessfully" % appName)
+   logger.info("Exposed app %s on Cluster successfully" % appName)
 
 def triggerDeploy(logger):
    deploymentData = {}
