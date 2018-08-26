@@ -45,6 +45,7 @@ These setup steps are relevant for Mac OS sierra
    - Hit Add Webhook
 
 10. Step 9 should trigger deployment process, on webhook service.
+   - Verify the deployment logs in server terminal window and
 
 11. Modify hello world statement in App code and push code to APP_CODE_URL
    - This would trigger deployment on backend side
@@ -52,8 +53,7 @@ These setup steps are relevant for Mac OS sierra
    - use logline <Exposed app hello-nodec0e2fa00 on Cluster successfully> to get service_name
    - view service using service name > minikube service hello-nodec0e2fa00
    - You should see hello world statement on browser
-
-12. Repeat step 11 to verify
+   - Repeat step 11 to verify
 
 13. Tear down is manual in this version
    - Use following commands to clear spawned services and deployments
