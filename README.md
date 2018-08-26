@@ -8,7 +8,7 @@ These setup steps are relevant for Mac OS sierra
 
 1. Fork App Code and clone to local
    - Fork code from app repository to your own github: https://github.com/cjsanjay/hello-node.git
-   - Note fork code github url <APP_CODE_URL>
+   - Note fork code github url - APP_CODE_URL
    - clone code to your local environment
 
 2. Clone webhook-service code from github to your local directory
@@ -36,9 +36,9 @@ These setup steps are relevant for Mac OS sierra
 8. Setup ngrok tunnel session in another terminal window
    - Open terminal window and move to ngrok installed location
    - Start ngrok tunnel session: ./ngrok http 5000
-   - <NGROK_URL> Copy the ngrok URL provided in output: Forwarding http://592304d1.ngrok.io -> localhost:5000
+   - NGROK_URL Copy the ngrok URL provided in output: Forwarding http://592304d1.ngrok.io -> localhost:5000
 
-9. Use ngrok url to setup webhook in APP_CODE_URL
+9. Use ngrok url from step8 to setup webhook in APP_CODE_URL
    - go to APP_CODE_URL on github and navigate to settings> webhooks> Add webhook
    - Paste following in Payload URL section:
    NGROK_URL/triggerDeploy
@@ -50,15 +50,15 @@ These setup steps are relevant for Mac OS sierra
 11. Modify hello world statement in App code and push code to APP_CODE_URL
    - This would trigger deployment on backend side
    - service will generate logs
-   - use logline <Exposed app hello-nodec0e2fa00 on Cluster successfully> to get service_name
+   - use logline Exposed app hello-nodec0e2fa00 on Cluster successfully to get service_name
    - view service using service name > minikube service hello-nodec0e2fa00
    - You should see hello world statement on browser
    - Repeat step 11 to verify
 
 13. Tear down is manual in this version
    - Use following commands to clear spawned services and deployments
-      - kubectl delete service <service_name>
-      - kubectl delete deployment <deployment_name>
+      - kubectl delete service service_name
+      - kubectl delete deployment deployment_name
    - Stop webhook_service from step7 using ctrl+c and deactivate virtualenv
    - Stop ngrok from step 8 using ctrl+c
    - Clear webhook from APP_CODE_URL
